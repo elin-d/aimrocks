@@ -23,6 +23,8 @@ jobs:
 
       - name: Download all the wheels
         uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
 
       - name: Publish wheels
         env:
@@ -75,6 +77,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           path: manylinux_dist/*.whl
+          name: artifact-${{ matrix.manylinux-version }}
 
   linux-dist-x86_64:
     runs-on: ubuntu-latest
@@ -140,6 +143,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           path: manylinux_dist/*.whl
+          name: artifact-${{ matrix.manylinux-version }}
 
   macos-deps:
     runs-on: m1
@@ -215,3 +219,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           path: dist/*.whl
+          name: artifact-mac-${{ matrix.arch }}
