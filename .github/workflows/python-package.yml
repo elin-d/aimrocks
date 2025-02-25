@@ -49,19 +49,19 @@ jobs:
 
       - name: Building dependencies for ${{ matrix.manylinux-version }}
         run: |
-         docker build \
+         docker build --no-cache \
          --build-arg FROM=quay.io/pypa/${{ matrix.manylinux-version }} \
          --target deps .
 
       - name: Building rocksdb for ${{ matrix.manylinux-version }}
         run: |
-         docker build \
+         docker build --no-cache \
          --build-arg FROM=quay.io/pypa/${{ matrix.manylinux-version }} \
          --target rocksdb .
 
       - name: Building wheels for ${{ matrix.manylinux-version }}
         run: |
-         docker build \
+         docker build --no-cache \
          --build-arg FROM=quay.io/pypa/${{ matrix.manylinux-version }} \
          --target wheels . \
          -t aimhubio/aimrocks:${{ matrix.manylinux-version }}
