@@ -59,6 +59,10 @@ jobs:
          --build-arg FROM=quay.io/pypa/${{ matrix.manylinux-version }} \
          --target rocksdb .
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        timeout-minutes: 3
+
       - name: Building wheels for ${{ matrix.manylinux-version }}
         run: |
          docker build --no-cache \
@@ -124,6 +128,10 @@ jobs:
          docker build \
          --build-arg FROM=quay.io/pypa/${{ matrix.manylinux-version }} \
          --target rocksdb .
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        timeout-minutes: 3
 
       - name: Building wheels for ${{ matrix.manylinux-version }}
         run: |
@@ -212,6 +220,11 @@ jobs:
       AIM_DEP_DIR: /tmp/run/${{ github.run_number }}/${{ matrix.arch }}
       PYTHON: /opt/conda/${{ matrix.arch }}/envs/py${{ matrix.python-version }}/bin/python
     steps:
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        timeout-minutes: 3
+
       - name: Build and test wheels
         run: |
           arch -${{matrix.arch}} $PYTHON -m build
