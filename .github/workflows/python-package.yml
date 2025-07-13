@@ -61,7 +61,7 @@ jobs:
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
-        timeout-minutes: 3
+        timeout-minutes: 20
 
       - name: Building wheels for ${{ matrix.manylinux-version }}
         run: |
@@ -131,7 +131,7 @@ jobs:
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
-        timeout-minutes: 3
+        timeout-minutes: 20
 
       - name: Building wheels for ${{ matrix.manylinux-version }}
         run: |
@@ -223,7 +223,7 @@ jobs:
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
-        timeout-minutes: 3
+        timeout-minutes: 20
 
       - name: Build and test wheels
         run: |
