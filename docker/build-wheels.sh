@@ -24,8 +24,9 @@ do
   python_exe=/opt/python/${python_version}/bin/python
   if [ -f "$python_exe" ]
   then
-    echo "\n\n\n\n\n\n\n\n\n\nBuilding ${python_version}\n\n" >&2
+    echo "##[group]Building ${python_version}\n\n" >&2
     $python_exe -m build
     rm -rf build
+    echo "##[endgroup]"
   fi
 done
