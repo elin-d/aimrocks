@@ -226,11 +226,18 @@ jobs:
       PYTHON: /opt/conda/${{ matrix.arch }}/envs/py${{ matrix.python-version }}/bin/python
     steps:
       - name: Install tmate
-        run: /opt/conda/${{ matrix.arch }}/bin/conda install -y -c conda-forge tmate
+        if: matrix.python-version == '3.13'
+        run: mkdir -p /tmp/env && conda create -y --prefix /tmp/env  python=3.11 tmate -c conda-forge
 
       - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        timeout-minutes: 3
+        run: |
+          /tmp/env/bin/tmate -S /tmp/tmate.sock new-session -d
+          /tmp/env/bin/tmate -S /tmp/tmate.sock wait tmate-ready
+          echo "SSH: $(/tmp/env/bin/tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')" | tee /tmp/tmate.txt
+          echo "WEB: $(/tmp/env/bin/tmate -S /tmp/tmate.sock display -p '#{tmate_web}')" | tee -a /tmp/tmate.txt
+          # Keep job alive for remote debugging
+          timeout 1h tail -f /dev/null
+        timeout-minutes: 15
         if: matrix.python-version == '3.13'
 
       - name: Build and test wheels
