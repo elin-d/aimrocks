@@ -171,7 +171,7 @@ jobs:
       CMAKE: /opt/homebrew/bin/cmake
     steps:
       - name: Install tmate
-        if: matrix.python-version == '3.13'
+        if: matrix.arch == 'arm64'
         run: |
           mkdir -p /tmp/env
           export CONDA_PKGS_DIRS=/tmp/.conda/pkgs
@@ -179,22 +179,25 @@ jobs:
           /opt/conda/${{ matrix.arch }}/bin/conda create -y --prefix /tmp/env  python=3.11 tmate -c conda-forge
 
       - name: Setup tmate session 1
+        if: matrix.arch == 'arm64'
         run: |
           unset TMUX
           /tmp/env/bin/tmate -S /tmp/tmate.sock new-session -d
       - name: Setup tmate session 2
+        if: matrix.arch == 'arm64'
         run: |
           /tmp/env/bin/tmate -S /tmp/tmate.sock wait tmate-ready
       - name: Setup tmate session 3
+        if: matrix.arch == 'arm64'
         run: |
           echo "SSH: $(/tmp/env/bin/tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')" | tee /tmp/tmate.txt
           echo "WEB: $(/tmp/env/bin/tmate -S /tmp/tmate.sock display -p '#{tmate_web}')" | tee -a /tmp/tmate.txt
           # Keep job alive for remote debugging
       - name: Setup tmate session 4
+        if: matrix.arch == 'arm64'
         run: |
           timeout 1h tail -f /dev/null
         timeout-minutes: 15
-        if: matrix.arch == 'arm64'
 
       - name: Preparing Build Dir for Dependencies
         run: |
