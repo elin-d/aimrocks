@@ -18,7 +18,7 @@ except ImportError:
 
 
 aimrocks_extra_compile_args = [
-    '-std=c++17',
+    '-std=c++11',
     '-O3',
     '-Wall',
     '-Wextra',
