@@ -225,6 +225,9 @@ jobs:
       AIM_DEP_DIR: /tmp/run/${{ github.run_number }}/${{ matrix.arch }}
       PYTHON: /opt/conda/${{ matrix.arch }}/envs/py${{ matrix.python-version }}/bin/python
     steps:
+      - name: Install tmate
+        run: /opt/conda/${{ matrix.arch }}/bin/conda install -y -c conda-forge tmate
+
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
         timeout-minutes: 3
