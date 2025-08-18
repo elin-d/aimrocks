@@ -8,7 +8,7 @@ jobs:
       - linux-dist-aarch64
       - linux-dist-x86_64
       - macos-dist
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     name: Uploading wheels
     steps:
       - name: Setup python
@@ -83,7 +83,7 @@ jobs:
           name: artifact-${{ matrix.manylinux-version.image }}
           
   linux-dist-x86_64:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
