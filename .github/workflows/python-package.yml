@@ -38,8 +38,8 @@ jobs:
       fail-fast: false
       matrix:
         manylinux-version:
-          - {image: 'manylinux_2_28_aarch64', tag: 'latest'}
-          - {image: 'manylinux2014_aarch64', tag: 'latest'}
+          - {image: 'manylinux_2_28_aarch64', tag: '2024-04-23-ef7507e'}
+          - {image: 'manylinux2014_aarch64', tag: '2024-03-25-9206bd9'}
           - {image: 'manylinux_2_24_aarch64', tag: 'latest'}
     name: ${{ matrix.manylinux-version.image }} using Docker on M1 Mac
     steps:
