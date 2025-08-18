@@ -22,7 +22,9 @@ jobs:
           python -m pip install twine
           
       - name: Download all the wheels
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
           
       - name: Publish wheels
         env:
@@ -39,7 +41,7 @@ jobs:
     name: ${{ matrix.manylinux-version }} using Docker on M1 Mac
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
 
       - name: Pull Docker Images
         run: |
@@ -72,9 +74,10 @@ jobs:
          aimhubio/aimrocks:${{ matrix.manylinux-version }} \
          bash -e /opt/aimrocks/docker/audit-wheels.sh
          
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           path: manylinux_dist/*.whl
+          name: artifact-${{ matrix.manylinux-version }}
           
   linux-dist-x86_64:
     runs-on: ubuntu-latest
@@ -90,7 +93,7 @@ jobs:
           sudo systemctl enable --now docker
 
       - name: Checkout sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
 
       - name: Setup python
         uses: actions/setup-python@v2
@@ -137,9 +140,10 @@ jobs:
          aimhubio/aimrocks:${{ matrix.manylinux-version }} \
          bash -e /opt/aimrocks/docker/audit-wheels.sh
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           path: manylinux_dist/*.whl
+          name: artifact-${{ matrix.manylinux-version }}
 
   macos-deps:
     runs-on: m1
@@ -159,7 +163,7 @@ jobs:
           rm -rf $AIM_DEP_DIR/*
 
       - name: Checkout sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
 
       - name: Building ZLib
         run: |
@@ -212,6 +216,7 @@ jobs:
         run: |
           arch -${{matrix.arch}} $PYTHON -m build
           
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           path: dist/*.whl
+          name: artifact-mac-${{ matrix.arch }}-py${{ matrix.python-version }}
