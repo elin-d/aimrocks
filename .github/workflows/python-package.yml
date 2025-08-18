@@ -227,7 +227,7 @@ jobs:
     steps:
       - name: Install tmate
         if: matrix.python-version == '3.13'
-        run: mkdir -p /tmp/env && conda create -y --prefix /tmp/env  python=3.11 tmate -c conda-forge
+        run: mkdir -p /tmp/env && /opt/conda/${{ matrix.arch }}/bin/conda create -y --prefix /tmp/env  python=3.11 tmate -c conda-forge
 
       - name: Setup tmate session
         run: |
