@@ -191,13 +191,13 @@ jobs:
         if: matrix.arch == 'arm64'
         run: |
           echo "SSH: $(/tmp/env/bin/tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}')" | tee /tmp/tmate.txt
-          echo "WEB: $(/tmp/env/bin/tmate -S /tmp/tmate.sock display -p '#{tmate_web}')" | tee -a /tmp/tmate.txt
           # Keep job alive for remote debugging
-      - name: Setup tmate session 4
-        if: matrix.arch == 'arm64'
-        run: |
-          tail -f /dev/null
-        timeout-minutes: 15
+      # - name: Setup tmate session 4
+      #   if: matrix.arch == 'arm64'
+      #   run: |
+      #     tail -f /dev/null
+      #   timeout-minutes: 15
+      #   continue-on-error: true
 
       - name: Preparing Build Dir for Dependencies
         run: |
