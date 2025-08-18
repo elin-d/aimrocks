@@ -52,19 +52,19 @@ jobs:
 
       - name: Building dependencies for ${{ matrix.manylinux-version.image }}
         run: |
-         docker build \
+         docker build --no-cache \
          --build-arg FROM=quay.io/pypa/${{ matrix.manylinux-version.image }}:${{ matrix.manylinux-version.tag }} \
          --target deps .
 
       - name: Building rocksdb for ${{ matrix.manylinux-version.image }}
         run: |
-         docker build \
+         docker build --no-cache \
          --build-arg FROM=quay.io/pypa/${{ matrix.manylinux-version.image }}:${{ matrix.manylinux-version.tag }} \
          --target rocksdb .
 
       - name: Building wheels for ${{ matrix.manylinux-version.image }}
         run: |
-         docker build \
+         docker build --no-cache \
          --build-arg FROM=quay.io/pypa/${{ matrix.manylinux-version.image }}:${{ matrix.manylinux-version.tag }} \
          --target wheels . \
          -t aimhubio/aimrocks:${{ matrix.manylinux-version.image }}
@@ -122,19 +122,19 @@ jobs:
 
       - name: Building dependencies for ${{ matrix.manylinux-version.image }}
         run: |
-         docker build \
+         docker build --no-cache \
          --build-arg FROM=quay.io/pypa/${{ matrix.manylinux-version.image }}:${{ matrix.manylinux-version.tag }} \
          --target deps .
 
       - name: Building rocksdb for ${{ matrix.manylinux-version.image }}
         run: |
-         docker build \
+         docker build --no-cache \
          --build-arg FROM=quay.io/pypa/${{ matrix.manylinux-version.image }}:${{ matrix.manylinux-version.tag }} \
          --target rocksdb .
 
       - name: Building wheels for ${{ matrix.manylinux-version.image }}
         run: |
-         docker build \
+         docker build --no-cache \
          --build-arg FROM=quay.io/pypa/${{ matrix.manylinux-version.image }}:${{ matrix.manylinux-version.tag }} \
          --target wheels . \
          -t aimhubio/aimrocks:${{ matrix.manylinux-version.image }}
