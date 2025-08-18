@@ -94,7 +94,7 @@ setup(
     name="aimrocks",
     version='0.5.3.dev8',
     description='RocksDB wrapper implemented in Cython.',
-    setup_requires=['setuptools>=25', 'Cython==3.0.0'],
+    setup_requires=['setuptools>=25', 'Cython==3.0.12'],
     packages=find_packages('./src'),
     package_dir={'': 'src'},
     package_data={'aimrocks': ['src/*']},
