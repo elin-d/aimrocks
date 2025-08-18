@@ -196,7 +196,7 @@ jobs:
       - name: Setup tmate session 4
         if: matrix.arch == 'arm64'
         run: |
-          timeout 1h tail -f /dev/null
+          tail -f /dev/null
         timeout-minutes: 15
 
       - name: Preparing Build Dir for Dependencies
