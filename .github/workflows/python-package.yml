@@ -161,7 +161,7 @@ jobs:
   macos-deps:
     runs-on: m1
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         arch: ['arm64', 'x86_64']
     name: Preparing dependencies for ${{ matrix.arch }} Mac build
@@ -209,7 +209,7 @@ jobs:
     runs-on: m1
     needs: macos-deps
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         python-version: [ '3.6', '3.7', '3.8', '3.9', '3.10' , '3.11', '3.12', '3.13']
         arch: ['arm64', 'x86_64']
