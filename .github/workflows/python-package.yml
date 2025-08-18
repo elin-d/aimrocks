@@ -25,6 +25,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           merge-multiple: true
+          path: artifact
+      
+      - name: Display structure of downloaded files
+        run: ls -R
           
       - name: Publish wheels
         env:
@@ -81,6 +85,7 @@ jobs:
         with:
           path: manylinux_dist/*.whl
           name: artifact-${{ matrix.manylinux-version.image }}
+          if-no-files-found: error
           
   linux-dist-x86_64:
     runs-on: ubuntu-22.04
@@ -151,6 +156,7 @@ jobs:
         with:
           path: manylinux_dist/*.whl
           name: artifact-${{ matrix.manylinux-version.image }}
+          if-no-files-found: error
 
   macos-deps:
     runs-on: m1
@@ -227,3 +233,4 @@ jobs:
         with:
           path: dist/*.whl
           name: artifact-mac-${{ matrix.arch }}-py${{ matrix.python-version }}
+          if-no-files-found: error
