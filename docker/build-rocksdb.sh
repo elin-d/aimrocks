@@ -19,7 +19,7 @@ then
   cp /opt/aimrocks_deps/rocksdb_sched.patch .
   patch port/port_posix.cc rocksdb_sched.patch
 fi
-LIBRARY_PATH=$PWD/../lib  PORTABLE=1 make shared_lib PLATFORM_SHARED_VERSIONED=false EXTRA_CXXFLAGS="-fPIC -I../include" EXTRA_CFLAGS="-fPIC" USE_RTTI=0 DEBUG_LEVEL=0 -j4
+LIBRARY_PATH=$PWD/../lib  PORTABLE=1 make shared_lib PLATFORM_SHARED_VERSIONED=false DISABLE_WARNING_AS_ERROR=1 EXTRA_CXXFLAGS="-fPIC -I../include -include cstdint" EXTRA_CFLAGS="-fPIC" USE_RTTI=0 DEBUG_LEVEL=0 -j4
 strip --strip-debug librocksdb.so
 cp librocksdb.so ../lib/
 PORTABLE=1 make PREFIX="$PWD/.." DEBUG_LEVEL=0 install-headers
